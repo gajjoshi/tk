@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  padding: 20px 20px 20px 20px; /* 👈 Left padding removed */
+      position: relative;
+    }
+
+    .logo {
+      max-height: 60px;
+    }
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+  gap: 20px;
+}
+
+.image-box {
+  flex: 1;
+  min-width: 280px;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.content-box {
+  flex: 1;
+  min-width: 300px;
+  color: #f1f1f1;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.tagline {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.subtext {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+.counter-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.count-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.count-label {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 10px;
+  font-weight: 500;
+}
+.globe-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.globe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.globe-circle {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #17c8e5, #0a0a0a);
+  border: 3px solid #17c8e5;
+  animation: rotateGlobe 12s linear infinite;
+  box-shadow: 0 0 30px rgba(23, 200, 229, 0.5);
+}
+
+.pin {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(45deg, #17c8e5, #e52e9b);
+  border-radius: 50%;
+  box-shadow: 0 0 10px #e52e9b;
+}
+
+.globe-counter {
+  margin-top: 30px;
+}
+
+.country-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.globe-label {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.lead-form-wrapper {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 3px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #17c8e5, #e52e9b);
+}
+
+.lead-form-section {
+  background-color: #0a0a0a;
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.lead-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+    margin-left: 20px;
+
+    max-width: 300px;
+      align-items: center; /* ✅ center-align children */
+
+
+}
+
+.lead-form input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #17c8e5;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.lead-form input::placeholder {
+  color: #888;
+}
+
+.lead-form button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.lead-form button:hover {
+  opacity: 0.9;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.market-gradient {
+  font-weight: bold;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #17c8e5, #e52e9b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+
+
+@keyframes rotateGlobe {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+@media (max-width: 600px) {
+  .counter-text {
+    font-size: 2.2rem;
+  }
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+    
+  <header>
+    <img src="logo.png" alt="Logo" class="logo" />
+  </header>
+
+<div class="hero-section">
+  <div class="image-box">
+    <img src="RR.png" alt="Main Visual" class="main-image" />
+  </div>
+  <div class="content-box">
+    <h1 class="tagline">World's Most Trusted Trading Platform</h1>
+<p class="subtext">
+  <span class="market-gradient">NSE · MCX · CRYPTO · FOREX · US MARKET</span><br/><br/>
+  A UK-licensed brokering house now operating in <strong>India</strong><br/>
+  Trusted in <strong>4+ countries</strong> for its reliability and reach.<br/>
+  Enjoy <strong>instant withdrawals</strong> and <strong>super-fast service</strong> built for today's pace.
+</p>
+
+  </div>
+</div>
+
+<div class="counter-section">
+  <div class="counter-text">
+    <div class="count-number"><span id="traderCount">1</span>+</div>
+    <div class="count-label">Traders All Over the Globe</div>
+  </div>
+
+  <div class="counter-text" style="margin-top: 40px;">
+<div class="count-number" id="countryCountText">1</div>
+    <div class="count-label">Countries Actively Operating In</div>
+  </div>
+</div>
+
+<div class="counter-text" style="margin-top: 40px;">
+  <div class="count-number" id="depositCount">$1</div>
+  <div class="count-label">Total withdrawals Done today</div>
+</div>
+
+
+
+
+
+
+
+</div>
+<div class="lead-form-wrapper">
+  <div class="lead-form-section">
+    <h2 class="lead-title">Trade Now With Us</h2>
+    <form class="lead-form" onsubmit="return handleLeadFormSubmit(event)">
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<a href="https://wa.me/+250795581108" target="_blank" class="whatsapp-float">
+  <img src="wp4.png" alt="WhatsApp" class="whatsapp-icon" />
+</a>
+
+
+
+<script>
+  // Trader Count Animation
+  const traderCount = document.getElementById("traderCount");
+  let trader = 1;
+  const traderTarget = 10289;
+  const traderDuration = 2000;
+  const traderStep = Math.ceil(traderTarget / (traderDuration / 16));
+
+  const traderCounter = setInterval(() => {
+    trader += traderStep;
+    if (trader >= traderTarget) {
+      trader = traderTarget;
+      clearInterval(traderCounter);
+    }
+    traderCount.textContent = trader.toLocaleString();
+  }, 16);
+
+
+
+
+
+</script>
+<script>
+  const countryCountText = document.getElementById("countryCountText");
+  let currentCount = 1;
+  const finalCount = 10;
+  const intervalTime = 100; // speed (ms)
+  
+  const updateCountryCount = setInterval(() => {
+    currentCount++;
+    if (currentCount >= finalCount) {
+      countryCountText.textContent = finalCount + "+";
+      clearInterval(updateCountryCount);
+    } else {
+      countryCountText.textContent = currentCount;
+    }
+  }, intervalTime);
+</script>
+<script>
+  const depositCount = document.getElementById("depositCount");
+  let current = 1;
+  const target = 58.9; // in millions
+  const duration = 2500; // total animation time in ms
+  const step = (target - 1) / (duration / 16); // smooth animation
+
+  const depositCounter = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(depositCounter);
+    }
+    depositCount.textContent = "$" + current.toFixed(1) + "M";
+  }, 16);
+</script>
+
+
+
+
+
+
+</body>
+</html>

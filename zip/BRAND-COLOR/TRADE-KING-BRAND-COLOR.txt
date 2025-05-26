@@ -1,0 +1,24 @@
+Light Blue Color:
+HEX: #17c8e5
+R:23, G:200, B:229
+C:65, M:0, Y:10, K:0
+
+Pink Reddish Color:
+HEX: #e52e9b
+R:229, G:46, B:155
+C:6, M:92, Y:0, K:0
+
+Dark Gray Color:
+HEX: #333132
+R:65, G:64, B:66
+C:0, M:0, Y:0, K:95
+
+Black Color
+HEX: #0000
+R:0, G:0, B:0
+C:0, M:0, Y:0, K:100
+
+White Color:
+HEX: #FFFFFF
+R:255, G:255, B:255
+C:0, M:0, Y:0, K:0
