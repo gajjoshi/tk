@@ -55,7 +55,7 @@
 .tagline {
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
   background: linear-gradient(90deg, #17c8e5, #e52e9b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -230,6 +230,42 @@
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  z-index: 999;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+}
+
+.bar-button {
+  flex: 1;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 0;
+}
+
+.left-button {
+  background: linear-gradient(90deg, #17c8e5, #38e5b0);
+}
+
+.right-button {
+  background: linear-gradient(90deg, #e52e9b, #ff5aad);
+}
+
+.bar-button:hover {
+  opacity: 0.9;
+}
+
 
 
 
@@ -280,8 +316,11 @@
     <h1 class="tagline">World's Most Trusted Trading Platform</h1>
 <p class="subtext">
   <!-- <span class="market-gradient">NSE · MCX · CRYPTO · FOREX · US MARKET · COMEX</span><br/><br/> -->
+
+  
    <span class="market-gradient"><span id="marketText"></span></span>
    <br/><br/>
+   
 
   A UK-licensed broking house now operating in <strong>India</strong><br/>
   Trusted in <strong>4+ countries</strong> for its reliability and reach.<br/>
@@ -323,13 +362,15 @@
   <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
   <button type="submit">Submit</button>
 </form>
-<p id="form-status" style="margin-top: 10px; color: #17c8e5;"></p>
+<p id="form-status" style="margin-top: 1px; color: #17c8e5;"></p>
 
   </div>
 </div>
-<a href="https://wa.me/+250795581108" target="_blank" class="whatsapp-float">
-  <img src="wp4.png" alt="WhatsApp" class="whatsapp-icon" />
-</a>
+<div class="bottom-bar">
+  <button class="bar-button left-button">Sign Up</button>
+  <button class="bar-button right-button">Enquire</button>
+</div>
+
 
 
 
@@ -434,7 +475,7 @@
   white-space: nowrap;
   display: block;
   text-align: center; /* ✅ Center align */
-  margin-top: 10px;
+  margin-top: 1px;
 }
 
 #marketText::after {
@@ -467,7 +508,7 @@
 
     if (!isDeleting && charIndex < currentWord.length) {
       charIndex++;
-      setTimeout(typeEffect, 100); // typing speed
+      setTimeout(typeEffect, 50); // typing speed
     } else if (isDeleting && charIndex > 0) {
       charIndex--;
       setTimeout(typeEffect, 50); // deleting speed
@@ -485,6 +526,18 @@
 
   typeEffect();
 </script>
+
+<script>
+  document.querySelector('.left-button').onclick = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Scroll to form
+  };
+
+document.querySelector('.right-button').onclick = () => {
+  window.open("https://wa.me/+250795581108", "_blank");
+};
+
+</script>
+
 
 
 
