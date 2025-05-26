@@ -6,7 +6,8 @@
   <title>Landing Page</title>
   <style>
     body {
-      margin: 0;
+        margin: 0;
+  padding: 0; /* ✅ Add this to remove any default padding */
       background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
@@ -16,8 +17,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-  padding: 20px 20px 20px 20px; /* 👈 Left padding removed */
-      position: relative;
+  padding: 10px 0px 0px 20px; 
     }
 
     .logo {
@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 40px 20px;
+  padding: 0px 20px;
   gap: 20px;
 }
 
@@ -42,7 +42,7 @@
   width: 100%;
   max-width: 500px;
   height: auto;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .content-box {
@@ -279,7 +279,10 @@
   <div class="content-box">
     <h1 class="tagline">World's Most Trusted Trading Platform</h1>
 <p class="subtext">
-  <span class="market-gradient">NSE · MCX · CRYPTO · FOREX · US MARKET · COMEX</span><br/><br/>
+  <!-- <span class="market-gradient">NSE · MCX · CRYPTO · FOREX · US MARKET · COMEX</span><br/><br/> -->
+   <span class="market-gradient"><span id="marketText"></span></span>
+   <br/><br/>
+
   A UK-licensed broking house now operating in <strong>India</strong><br/>
   Trusted in <strong>4+ countries</strong> for its reliability and reach.<br/>
   Enjoy <strong>instant withdrawals</strong> and <strong>super-fast service</strong> built for today's pace.
@@ -421,6 +424,68 @@
     return false;
   }
 </script>
+
+
+<style>
+.market-gradient {
+  font-weight: 900;
+  font-size: 2rem; /* Increased size */
+  color: #fff;
+  white-space: nowrap;
+  display: block;
+  text-align: center; /* ✅ Center align */
+  margin-top: 10px;
+}
+
+#marketText::after {
+  content: "|";
+  animation: blink 1s step-start infinite;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+</style>
+
+<script>
+  const markets = ["NSE", "MCX", "CRYPTO", "FOREX", "US MARKET"];
+  const marketText = document.getElementById("marketText");
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    const currentWord = markets[wordIndex];
+    const partialWord = currentWord.substring(0, charIndex);
+
+    marketText.textContent = partialWord;
+
+    if (!isDeleting && charIndex < currentWord.length) {
+      charIndex++;
+      setTimeout(typeEffect, 100); // typing speed
+    } else if (isDeleting && charIndex > 0) {
+      charIndex--;
+      setTimeout(typeEffect, 50); // deleting speed
+    } else {
+      if (!isDeleting) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1200); // wait before deleting
+      } else {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % markets.length;
+        setTimeout(typeEffect, 400); // wait before typing next word
+      }
+    }
+  }
+
+  typeEffect();
+</script>
+
 
 
 
