@@ -330,22 +330,25 @@
   </div>
 </div>
 
-<div class="counter-section">
-  <div class="counter-text">
-    <div class="count-number"><span id="traderCount">1</span>+</div>
-    <div class="count-label">Traders All Over the Globe</div>
-  </div>
+<div id="counterWrapper">
+  <div class="counter-section">
+    <div class="counter-text">
+      <div class="count-number"><span id="traderCount">1</span>+</div>
+      <div class="count-label">Traders All Over the Globe</div>
+    </div>
 
-  <div class="counter-text" style="margin-top: 40px;">
-<div class="count-number" id="countryCountText">1</div>
-    <div class="count-label">Countries Actively Operating In</div>
+    <div class="counter-text" style="margin-top: 40px;">
+      <div class="count-number" id="countryCountText">1</div>
+      <div class="count-label">Countries Actively Operating In</div>
+    </div>
+
+    <div class="counter-text" style="margin-top: 40px;">
+      <div class="count-number" id="depositCount">$1</div>
+      <div class="count-label">Total withdrawals Done today</div>
+    </div>
   </div>
 </div>
 
-<div class="counter-text" style="margin-top: 40px;">
-  <div class="count-number" id="depositCount">$1</div>
-  <div class="count-label">Total withdrawals Done today</div>
-</div>
 
 
 
@@ -373,60 +376,73 @@
 
 
 
-
 <script>
-  // Trader Count Animation
-  const traderCount = document.getElementById("traderCount");
-  let trader = 1;
-  const traderTarget = 10289;
-  const traderDuration = 2000;
-  const traderStep = Math.ceil(traderTarget / (traderDuration / 16));
+  let countersStarted = false;
 
-  const traderCounter = setInterval(() => {
-    trader += traderStep;
-    if (trader >= traderTarget) {
-      trader = traderTarget;
-      clearInterval(traderCounter);
+  function animateCounters() {
+    if (countersStarted) return; // prevent double run
+    countersStarted = true;
+
+    // Trader Count
+    const traderCount = document.getElementById("traderCount");
+    let trader = 1;
+    const traderTarget = 10289;
+    const traderStep = Math.ceil(traderTarget / (2000 / 16));
+    const traderCounter = setInterval(() => {
+      trader += traderStep;
+      if (trader >= traderTarget) {
+        trader = traderTarget;
+        clearInterval(traderCounter);
+      }
+      traderCount.textContent = trader.toLocaleString();
+    }, 16);
+
+    // Country Count
+    const countryCountText = document.getElementById("countryCountText");
+    let currentCountry = 1;
+    const finalCountry = 10;
+    const countryInterval = setInterval(() => {
+      currentCountry++;
+      if (currentCountry >= finalCountry) {
+        countryCountText.textContent = finalCountry + "+";
+        clearInterval(countryInterval);
+      } else {
+        countryCountText.textContent = currentCountry;
+      }
+    }, 100);
+
+    // Withdrawal Count
+    const depositCount = document.getElementById("depositCount");
+    let current = 1;
+    const target = 58.9;
+    const step = (target - 1) / (2500 / 16);
+    const depositCounter = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(depositCounter);
+      }
+      depositCount.textContent = "$" + current.toFixed(1) + "M";
+    }, 16);
+  }
+
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.bottom >= 0
+    );
+  }
+
+  function onScrollCheck() {
+    const wrapper = document.getElementById("counterWrapper");
+    if (isElementInViewport(wrapper)) {
+      animateCounters();
+      window.removeEventListener('scroll', onScrollCheck); // Remove listener after animation
     }
-    traderCount.textContent = trader.toLocaleString();
-  }, 16);
+  }
 
-
-
-
-
-</script>
-<script>
-  const countryCountText = document.getElementById("countryCountText");
-  let currentCount = 1;
-  const finalCount = 10;
-  const intervalTime = 100; // speed (ms)
-  
-  const updateCountryCount = setInterval(() => {
-    currentCount++;
-    if (currentCount >= finalCount) {
-      countryCountText.textContent = finalCount + "+";
-      clearInterval(updateCountryCount);
-    } else {
-      countryCountText.textContent = currentCount;
-    }
-  }, intervalTime);
-</script>
-<script>
-  const depositCount = document.getElementById("depositCount");
-  let current = 1;
-  const target = 58.9; // in millions
-  const duration = 2500; // total animation time in ms
-  const step = (target - 1) / (duration / 16); // smooth animation
-
-  const depositCounter = setInterval(() => {
-    current += step;
-    if (current >= target) {
-      current = target;
-      clearInterval(depositCounter);
-    }
-    depositCount.textContent = "$" + current.toFixed(1) + "M";
-  }, 16);
+  window.addEventListener('scroll', onScrollCheck);
 </script>
 
 <script>
