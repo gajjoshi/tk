@@ -313,11 +313,13 @@
 <div class="lead-form-wrapper">
   <div class="lead-form-section">
     <h2 class="lead-title">Trade Now With Us</h2>
-    <form class="lead-form" onsubmit="return handleLeadFormSubmit(event)">
-      <input type="text" id="name" name="name" placeholder="Your Name" required />
-      <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
-      <button type="submit">Submit</button>
-    </form>
+<form class="lead-form" onsubmit="return handleLeadFormSubmit(event)">
+  <input type="text" id="name" name="name" placeholder="Your Name" required />
+  <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
+  <button type="submit">Submit</button>
+</form>
+<p id="form-status" style="margin-top: 10px; color: #17c8e5;"></p>
+
   </div>
 </div>
 <a href="https://wa.me/+250795581108" target="_blank" class="whatsapp-float">
@@ -380,6 +382,40 @@
     depositCount.textContent = "$" + current.toFixed(1) + "M";
   }, 16);
 </script>
+
+<script>
+  function handleLeadFormSubmit(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const statusEl = document.getElementById("form-status");
+
+    if (!name || !phone) {
+      statusEl.textContent = "Please enter both name and phone number.";
+      return false;
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbw2KYvFhPkrP_jHnnFaT9WRYAqPSl05E102Lf8nmsz7_NsBbqf0xX7AQQ80hPdA4v8O/exec", {
+      method: "POST",
+      body: JSON.stringify({ name, phone }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      statusEl.textContent = "✅ Thank you! We’ll get in touch shortly.";
+      event.target.reset();
+    })
+    .catch(err => {
+      statusEl.textContent = "❌ Something went wrong. Please try again.";
+    });
+
+    return false;
+  }
+</script>
+
 
 
 
