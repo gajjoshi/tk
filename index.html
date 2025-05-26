@@ -313,7 +313,7 @@
 <div class="lead-form-wrapper">
   <div class="lead-form-section">
     <h2 class="lead-title">Trade Now With Us</h2>
-<form class="lead-form" onsubmit="return handleLeadFormSubmit(event)">
+<form class="lead-form">
   <input type="text" id="name" name="name" placeholder="Your Name" required />
   <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
   <button type="submit">Submit</button>
@@ -395,9 +395,13 @@
       statusEl.textContent = "Please enter both name and phone number.";
       return false;
     }
+    
+    
 
-    fetch("https://script.google.com/macros/s/AKfycbw2KYvFhPkrP_jHnnFaT9WRYAqPSl05E102Lf8nmsz7_NsBbqf0xX7AQQ80hPdA4v8O/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbx8dbASOrKkWLPH8KoFRxBhlKbfdrTGRSURTL7hC7e3y8SpA8hiYvEb75XX3qPohKlK/exec", {
       method: "POST",
+              mode: 'no-cors',
+
       body: JSON.stringify({ name, phone }),
       headers: {
         "Content-Type": "application/json"
