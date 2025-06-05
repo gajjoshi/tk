@@ -313,7 +313,7 @@
   </div>
   
   <div class="content-box">
-    <h1 class="tagline">World's Most Trusted Trading Platform</h1>
+    <h1 class="tagline">India's Most Trusted Trading Platform</h1>
 <p class="subtext">
   <!-- <span class="market-gradient">NSE · MCX · CRYPTO · FOREX · US MARKET · COMEX</span><br/><br/> -->
 
@@ -322,8 +322,7 @@
    <br/><br/>
    
 
-  A UK-licensed broking house now operating in <strong>India</strong><br/>
-  Trusted in <strong>4+ countries</strong> for its reliability and reach.<br/>
+  INDIAS MOST TRUSTED TRADING PLATFORM<br/><strong>SUPER FAST WITHDRAWL</strong><br/><strong>24/7 SUPPORT</strong><br/>
   Enjoy <strong>instant withdrawals</strong> and <strong>super-fast service</strong> built for today's pace.
 </p>
 
@@ -334,12 +333,12 @@
   <div class="counter-section">
     <div class="counter-text">
       <div class="count-number"><span id="traderCount">1</span>+</div>
-      <div class="count-label">Traders All Over the Globe</div>
+      <div class="count-label">Traders All Over the India</div>
     </div>
 
     <div class="counter-text" style="margin-top: 40px;">
       <div class="count-number" id="countryCountText">1</div>
-      <div class="count-label">Countries Actively Operating In</div>
+      <div class="count-label">States Actively Operating In</div>
     </div>
 
     <div class="counter-text" style="margin-top: 40px;">
@@ -363,9 +362,11 @@
 <form class="lead-form">
   <input type="text" id="name" name="name" placeholder="Your Name" required />
   <input type="tel" id="phone" name="phone" placeholder="Phone Number" pattern="[0-9]{10,15}" required />
+  <input type="email" id="email" name="email" placeholder="Email Address" required />
   <button type="submit">Submit</button>
 </form>
 <p id="form-status" style="margin-top: 1px; color: #17c8e5;"></p>
+
 
   </div>
 </div>
@@ -373,6 +374,10 @@
   <button class="bar-button left-button">Sign Up</button>
   <button class="bar-button right-button">Enquire</button>
 </div>
+<p style="font-size: 0.8rem; color: #888; margin-top: 10px;">
+  Disclaimer: Trading financial instruments carries a high level of risk and may not be suitable for all investors. Ensure you fully understand the risks involved before trading.
+</p>
+
 
 
 
@@ -422,7 +427,7 @@
         current = target;
         clearInterval(depositCounter);
       }
-      depositCount.textContent = "$" + current.toFixed(1) + "M";
+      depositCount.textContent = "₹" + current.toFixed(1) + "CR";
     }, 16);
   }
 
@@ -445,42 +450,7 @@
   window.addEventListener('scroll', onScrollCheck);
 </script>
 
-<script>
-  function handleLeadFormSubmit(event) {
-    event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const statusEl = document.getElementById("form-status");
-
-    if (!name || !phone) {
-      statusEl.textContent = "Please enter both name and phone number.";
-      return false;
-    }
-    
-    
-
-    fetch("https://script.google.com/macros/s/AKfycbx8dbASOrKkWLPH8KoFRxBhlKbfdrTGRSURTL7hC7e3y8SpA8hiYvEb75XX3qPohKlK/exec", {
-      method: "POST",
-              mode: 'no-cors',
-
-      body: JSON.stringify({ name, phone }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      statusEl.textContent = "✅ Thank you! We’ll get in touch shortly.";
-      event.target.reset();
-    })
-    .catch(err => {
-      statusEl.textContent = "❌ Something went wrong. Please try again.";
-    });
-
-    return false;
-  }
-</script>
 
 
 <style>
@@ -559,8 +529,48 @@ document.querySelector('.right-button').onclick = () => {
 
 
 
+<script>
+  const form = document.querySelector('.lead-form');
+  const statusText = document.getElementById("form-status");
 
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!name || !phone) {
+      statusText.textContent = "Please fill in all fields.";
+      return;
+    }
+
+    statusText.textContent = "Submitting...";
+
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbzQ0JUnnGFS2MmN9q_3Ol0iihdvBoEs_ovdX9O9dxD3BjiraAdddFRw14pVGNMccboC5Q/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusText.textContent = "✅ Successfully submitted!";
+        form.reset();
+      } else {
+        statusText.textContent = "⚠️ Submission failed. Please try again.";
+      }
+    } catch (error) {ā
+      console.error("Error:", error);
+      statusText.textContent = "🚫 Network error. Try again later.";
+    }
+  });
+</script>
+
+ā
 
 </body>
 </html>
